@@ -200,15 +200,15 @@ def editar_equipo(directorio):
                 case 1:
                     print("\n------------------------------")
                     print("  Editar equipo de Liga Profesional  ")
-                    edit_equipo(directorio,"liga_profesional.csv", equipos_LP)
+                    equipos_LP = edit_equipo(directorio,"liga_profesional.csv", equipos_LP)
                 case 2:
                     print("\n------------------------------")
                     print("  Editar equipo de Primera Nacional  ")
-                    edit_equipo(directorio,"primera_nacional.csv", equipos_PN)
+                    equipos_PN = edit_equipo(directorio,"primera_nacional.csv", equipos_PN)
                 case 3:
                     print("\n------------------------------")
                     print("  Editar equipo de Federal A  ")
-                    edit_equipo(directorio, "federal_a.csv", equipos_FA)
+                    equipos_FA = edit_equipo(directorio, "federal_a.csv", equipos_FA)
                 case 4:
                     print("Volviendo al menú principal...")
                     break
@@ -257,6 +257,7 @@ def edit_equipo(directorio, archivo, lista_liga):
                                     writer.writeheader()
                                     writer.writerows(lista_liga)
                                 print("✅ Equipo editado con éxito.")
+                return lista_liga
     # Manejo de errores
     except FileNotFoundError:
         print("❌¡Error! Archivo no encontrado.")
