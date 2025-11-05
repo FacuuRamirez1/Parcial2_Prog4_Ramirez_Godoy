@@ -13,10 +13,6 @@ equipos_FA = []
 def cargar_datos(directorio, archivo, lista):
     pass
 
-
-
-
-
 # ==== para mostrar rutas de directorios y archivos ====
 def listar_archivos(directorio):
     try:
@@ -34,8 +30,6 @@ def listar_archivos(directorio):
         print("❌¡Error! Archivo no encontrado.")
     except Exception as e:
         print(f'❌Error al listar archivos: {e}.')
-
-
 
 
 
