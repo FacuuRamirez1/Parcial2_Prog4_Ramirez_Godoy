@@ -240,6 +240,7 @@ def edit_equipo(directorio, archivo, lista_liga):
                         })
 
                         nom_equipo = input("Ingrese el nombre del equipo a editar: ")
+                        encontrado = False
                         for equipo in lista_liga:
                             if nom_equipo.lower() == equipo["nombre"].lower():
                                 print("Ingrese los nuevos datos:")
@@ -256,8 +257,13 @@ def edit_equipo(directorio, archivo, lista_liga):
                                     writer = csv.DictWriter(liga, fieldnames=campos)
                                     writer.writeheader()
                                     writer.writerows(lista_liga)
+                                encontrado = True
                                 print("✅ Equipo editado con éxito.")
+                            
+                            if not encontrado:
+                                print("❌¡Equipo no encontrado!")
                 return lista_liga
+
     # Manejo de errores
     except FileNotFoundError:
         print("❌¡Error! Archivo no encontrado.")
