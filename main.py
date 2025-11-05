@@ -44,8 +44,8 @@ def main(directorio):
                     print("  Agregar equipo:  ")
                     agregar_equipo(directorio)
                 case 7:
-                    print("\n------------------------")
-                    print("Saliendo del programa...")
+                    print("\n----------------------------")
+                    print("  Saliendo del programa...  ")
                     break
                 case _:
                     print("❌¡Error! Ingrese una opción válida.")
@@ -55,4 +55,6 @@ def main(directorio):
             print(f'❌¡Error inesperado! {e}.')
 
 if __name__ == "__main__":
-    main(r"Parcial2_Prog4_Ramirez_Godoy/Futbol_argentino")
+    directorios = os.path.dirname(os.path.abspath(__file__))
+    futbol_directorio = os.path.join(directorios, "Futbol_argentino")
+    main(futbol_directorio)

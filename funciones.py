@@ -23,11 +23,9 @@ def listar_archivos(directorio):
                 print("-------------------------------------------")
                 listar_archivos(ruta)
             else:
-                print(ruta)
+                print(f'Archivo: {ruta}')
 
     # Manejo de errores
-    except FileNotFoundError:
-        print("❌¡Error! Archivo no encontrado.")
     except Exception as e:
         print(f'❌Error al listar archivos: {e}.')
 
@@ -48,24 +46,28 @@ def mostrar_equipos(directorio):
             liga = int(input("Seleccione una opción (1-5): "))
             match liga:
                 case 1:
-                    print("\n------------------------------")
-                    print("Equipos de la Liga Profesional")
-                    most_liga(directorio, "liga_profesional.csv")
+                    print("\n----------------------------------")
+                    print("  Equipos de la Liga Profesional  ")
+                    most_liga(directorio, "equipos_LP.csv", "Liga Profesional")
+                    break
                 case 2:
-                    print("\n------------------------------")
-                    print("Equipos de la Primera Nacional")
-                    most_liga(directorio,"primera_nacional.csv")
+                    print("\n----------------------------------")
+                    print("  Equipos de la Primera Nacional  ")
+                    most_liga(directorio,"equipos_PN.csv", "Primera Nacional")
+                    break
                 case 3:
-                    print("\n------------------------------")
-                    print("Equipos del Federal A")
-                    most_liga(directorio, "federal_a.csv")
+                    print("\n-----------------------------")
+                    print("    Equipos del Federal A    ")
+                    most_liga(directorio, "equipos_FA.csv", "Federal A")
+                    break
                 case 4:
                     print("\n-------------------")
                     print("  Todas las ligas  ")
                     print("-------------------")
-                    most_liga(directorio, "liga_profesional.csv")
-                    most_liga(directorio, "primera_nacional.csv")
-                    most_liga(directorio, "federal_a.csv")
+                    most_liga(directorio, "liga_profesional.csv", "Liga Profesional")
+                    most_liga(directorio, "primera_nacional.csv", "Primera Nacional")
+                    most_liga(directorio, "federal_a.csv", "Federal A")
+                    break
                 case 5:
                     print("Volviendo al menú principal...")
                     break
@@ -79,20 +81,24 @@ def mostrar_equipos(directorio):
             print(f'❌¡Error inesperado! {e}.')
 
 # Mostrar equipos de la liga seleccionada
-def most_liga(directorio, archivo):
+def most_liga(directorio, archivo, liga):
     try:
         for elemento in os.listdir(directorio):
             ruta = os.path.join(directorio, elemento)
             if os.path.isdir(ruta):
-                most_liga(ruta, archivo)
+                most_liga(ruta, archivo, liga)
 
-            elif elemento == archivo:
-                print("\n---------------------")
-                print(f' Equipos de {archivo}')
-                with open(ruta, "r", encoding="utf-8") as liga:
-                    reader = csv.DictReader(liga)
-                    for equipo in reader:
-                        print(f'Nombre: {equipo["nombre"]} | Ciudad: {equipo["ciudad"]} | Estadio: {equipo["estadio"]}')
+            elif elemento.lower() == archivo.lower():
+                if os.path.getsize(ruta) != 0:
+                    print("\n---------------------")
+                    print(f' Equipos de {liga}')
+                    with open(ruta, "r", encoding="utf-8") as liga:
+                        reader = csv.DictReader(liga, fieldnames=["nombre", "ciudad", "estadio"])
+                        next(reader)
+                        for equipo in reader:
+                            print(f'Nombre: {equipo["nombre"]} | Ciudad: {equipo["ciudad"]} | Estadio: {equipo["estadio"]}')
+                else:
+                    print("❌¡La liga está vacía!")
 
     # Manejo de errores
     except FileNotFoundError:
@@ -120,15 +126,15 @@ def editar_liga(directorio):
                 case 1:
                     print("\n------------------------------")
                     print("  Editar Liga Profesional  ")
-                    edit_liga(directorio,"liga_profesional.csv")
+                    edit_liga(directorio,"equipos_LP.csv")
                 case 2:
                     print("\n------------------------------")
                     print("  Editar Primera Nacional  ")
-                    edit_liga(directorio,"primera_nacional.csv")
+                    edit_liga(directorio,"equipos_PN.csv")
                 case 3:
                     print("\n------------------------------")
                     print("  Editar Federal A  ")
-                    edit_liga(directorio, "federal_a.csv")
+                    edit_liga(directorio, "equipos_FA.csv")
                 case 4:
                     print("Volviendo al menú principal...")
                     break
@@ -194,15 +200,15 @@ def editar_equipo(directorio):
                 case 1:
                     print("\n------------------------------")
                     print("  Editar equipo de Liga Profesional  ")
-                    equipos_LP = edit_equipo(directorio,"liga_profesional.csv", equipos_LP)
+                    equipos_LP = edit_equipo(directorio,"equipos_LP.csv", equipos_LP)
                 case 2:
                     print("\n------------------------------")
                     print("  Editar equipo de Primera Nacional  ")
-                    equipos_PN = edit_equipo(directorio,"primera_nacional.csv", equipos_PN)
+                    equipos_PN = edit_equipo(directorio,"equipos_PN.csv", equipos_PN)
                 case 3:
                     print("\n------------------------------")
                     print("  Editar equipo de Federal A  ")
-                    equipos_FA = edit_equipo(directorio, "federal_a.csv", equipos_FA)
+                    equipos_FA = edit_equipo(directorio, "equipos_FA.csv", equipos_FA)
                 case 4:
                     print("Volviendo al menú principal...")
                     break
@@ -278,7 +284,6 @@ def eliminar_equipo(directorio):
         print("4. Volver")
 
         try:
-
             elegir_liga = int(input("Elija una opción:"))
             if elegir_liga == 1:
                 print("\n------------------------------")
@@ -307,7 +312,7 @@ def eliminar_equipo(directorio):
         except Exception as e:
             print(f'❌¡Error inesperado! {e}.')
 
-    
+
 
 
 # ==== Agregar equipo a una liga ====
