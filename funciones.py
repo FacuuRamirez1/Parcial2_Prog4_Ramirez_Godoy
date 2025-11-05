@@ -232,10 +232,31 @@ def edit_equipo(directorio, archivo, lista_liga):
             elif elemento == archivo:
                 with open(ruta, "r", encoding="utf-8") as liga:
                     reader = csv.DictReader(liga)
-                    
-                    for i in reader:
-                        lista_liga.appen(reader.readline()) # Hay que corregir!
+                    for equipo in reader:
+                        lista_liga.append({
+                            "nombre":equipo["nombre"],
+                            "ciudad":equipo["ciudad"],
+                            "estadio":equipo["estadio"]
+                        })
 
+                        nom_equipo = input("Ingrese el nombre del equipo a editar: ")
+                        for equipo in lista_liga:
+                            if nom_equipo.lower() == equipo["nombre"].lower():
+                                print("Ingrese los nuevos datos:")
+                                nuevo_nombre = input("Nuevo nombre: ")
+                                nueva_ciudad = input("Nueva ciudad: ")
+                                nuevo_estadio = input("Nuevo estadio: ")
+
+                                equipo["nombre"] = nuevo_nombre
+                                equipo["ciudad"] = nueva_ciudad
+                                equipo["estadio"] = nuevo_estadio
+
+                                with open(ruta, "w", newline="", encoding="utf-8") as liga:
+                                    campos = ["nombre", "ciudad", "estadio"]
+                                    writer = csv.DictWriter(liga, fieldnames=campos)
+                                    writer.writeheader()
+                                    writer.writerows(lista_liga)
+                                print("✅ Equipo editado con éxito.")
     # Manejo de errores
     except FileNotFoundError:
         print("❌¡Error! Archivo no encontrado.")
