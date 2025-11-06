@@ -20,28 +20,34 @@ def main(directorio):
             opc = int(input("Seleccione una opción (1-7): "))
             match opc:
                 case 1:
-                    print("\n--------------------")
-                    print("  Ver directorios:  ")
+                    print("\n-------------------")
+                    print("  Ver directorios  ")
+                    print("-------------------")
                     listar_archivos(directorio)
                 case 2:
-                    print("\n----------------")
-                    print("  Ver equipos:  ")
+                    print("\n---------------")
+                    print("  Ver equipos  ")
+                    print("---------------")
                     mostrar_equipos(directorio)
                 case 3:
-                    print("\n----------------")
-                    print("  Editar liga:  ")
+                    print("\n---------------")
+                    print("  Editar liga  ")
+                    print("---------------")
                     editar_liga(directorio)
                 case 4:
-                    print("\n------------------")
-                    print("  Editar equipo:  ")
+                    print("\n-----------------")
+                    print("  Editar equipo  ")
+                    print("-----------------")
                     editar_equipo(directorio)
                 case 5:
-                    print("\n--------------------")
-                    print("  Eliminar equipo:  ")
+                    print("\n-------------------")
+                    print("  Eliminar equipo  ")
+                    print("-------------------")
                     eliminar_equipo(directorio)
                 case 6:
-                    print("\n-------------------")
-                    print("  Agregar equipo:  ")
+                    print("\n------------------")
+                    print("  Agregar equipo  ")
+                    print("------------------")
                     agregar_equipo(directorio)
                 case 7:
                     print("\n----------------------------")
