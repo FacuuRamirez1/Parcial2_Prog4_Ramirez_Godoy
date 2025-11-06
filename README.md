@@ -55,4 +55,4 @@ La implementación se centró en los requisitos obligatorios definidos en la Fas
 
 ### Video explicativo
 
-- Link del video explicativo:
+- Link del video explicativo: https://drive.google.com/file/d/13NyX2c8sChCl42QbUqFJTf2y2K9KG9PC/view?usp=sharing
